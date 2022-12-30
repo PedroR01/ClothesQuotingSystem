@@ -18,9 +18,6 @@ private:
 public:
 	Seller();
 	~Seller();
-	void mainMenu();
-	void sellerOptions();
-	void quoteMenu();
 	void quoteProduct(int& clothes);
 	std::string getSellerName();
 	const int* getSellerCode();

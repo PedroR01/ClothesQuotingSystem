@@ -128,12 +128,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Presenter.cpp" />
     <ClCompile Include="Quote.cpp" />
     <ClCompile Include="Seller.cpp" />
+    <ClCompile Include="Store.cpp" />
+    <ClCompile Include="View.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Clothes.h" />
+    <ClInclude Include="IView.h" />
+    <ClInclude Include="Presenter.h" />
     <ClInclude Include="Quote.h" />
     <ClInclude Include="Seller.h" />
+    <ClInclude Include="Store.h" />
+    <ClInclude Include="View.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

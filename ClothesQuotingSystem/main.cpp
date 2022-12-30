@@ -1,22 +1,11 @@
 #include <iostream>
 #include <vector>
-#include "Seller.h";
-#include "Quote.h";
-
-int Quote::quoteId = 000; // Esto luego deberia inicializarse en el View
-
-class Shop
-{
-};
-
-class View
-{
-};
+#include "View.h"
 
 int main()
 {
-	Seller* user = new Seller();
+	View* viewer = new View();
 
-	delete user;
+	delete viewer;
 	return 0;
 }
