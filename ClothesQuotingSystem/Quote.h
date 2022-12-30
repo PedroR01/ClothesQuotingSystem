@@ -9,19 +9,18 @@ class Seller;
 class Quote
 {
 private:
-	Seller* seller;
 
 	static int quoteId;
 	time_t quoteTime;
-	const int* sellerCode; // error
+	int sellerCode;
 	std::string quotedClothes;
 	int quotedUnits;
 	double quoteOutcome;
 
 public:
-	Quote(int& clothes);
+	Quote(int& clothes, Seller* accessCode);
 	~Quote();
-	void calculate();
+	int calculate(int& _quotedUnits);
 };
 
 #endif // !QUOTE_H

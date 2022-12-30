@@ -1,5 +1,6 @@
 #include "Seller.h"
 #include "Quote.h"
+#include "Store.h"
 #include <iostream>
 #include <sstream>
 
@@ -8,47 +9,45 @@ int Quote::quoteId = 000;
 
 Seller::Seller()
 {
-	std::string _name;
-	std::string _lastname;
-	int _sellerCode;
-
 	std::cout << "Seller name: ";
-	std::getline(std::cin, _name);
+	std::getline(std::cin, name);
 	std::cout << "Lastname: ";
-	std::getline(std::cin, _lastname);
+	std::getline(std::cin, lastname);
 	std::cout << "Seller code: ";
-	std::cin >> _sellerCode;
+	std::cin >> sellerCode;
 
-	this->name = &_name;
-	this->lastname = &_lastname;
-	this->sellerCode = &_sellerCode;
+	sellerStore = new Store();
 }
 
 Seller::~Seller()
 {
+	delete sellerStore;
 	std::cout << "\nSeller went home! Please come back tomorrow" << std::endl;
 }
 
 void Seller::quoteProduct(int& clothes)
 {
-	Quote* quote = new Quote(clothes);
+	Quote* quote = new Quote(clothes, this);
 
 	quotesRecord.push_back(quote); // Asi o con el agregado del "*" o "&"
 
-	delete quote;
+	delete quote; // Esto borra la cotizacion del historial tambien?
 }
 
-/// ------ GETTERS error de acceso nullptr cuando se quieren acceder externamente
-std::string Seller::getSellerName()
+std::string Seller::getSellerStore()const
 {
-	return *name + " " + *lastname;
+	return sellerStore->getStoreInfo();
 }
 
-const int* Seller::getSellerCode()
+std::string Seller::getSellerName()const
+{
+	return name + " " + lastname;
+}
+
+int Seller::getSellerCode() const
 {
 	return sellerCode;
 }
-/// ------
 
 std::string Seller::parseNum(int value)
 {

@@ -2,26 +2,29 @@
 #include "Seller.h"
 #include <iostream>
 
-Quote::Quote(int& clothes)
+Quote::Quote(int& clothes, Seller* accessCode)
 {
 	quoteId++;
 	quoteTime = time(0);
 	char qt[26];
 	ctime_s(qt, sizeof qt, &quoteTime);
-	this->sellerCode = 0;		//seller->getSellerCode(); // Error: infraccion de acceso de lectura = nullptr
+	sellerCode = accessCode->getSellerCode();
 
 	if (clothes == 1)
 		quotedClothes = "Shirt";
 	else
 		quotedClothes = "Pants";
+
+	quotedUnits = 0;
+	quoteOutcome = 0;
 }
 
 Quote::~Quote()
 {
-	this->quoteOutcome;
+	//this->quoteOutcome;
 }
 
-void Quote::calculate()
+int Quote::calculate(int& _quotedUnits)
 {
 	// SHIRT PRICE CHANGERS
 	// longSleeve + regularCollar = initialQuote // Precio normal
@@ -35,4 +38,5 @@ void Quote::calculate()
 	// CLOTHES QUALITY PRICE CHANGERS
 	// normal = quoteOutcome // Precio final se mantiene luego de las especificaciones anteriores
 	// premium = quoteOutcome = (quoteOutcome*30) / 100 // Precio final es +30% si es calidad premium
+	return quoteOutcome;
 }

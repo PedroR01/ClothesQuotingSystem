@@ -1,7 +1,4 @@
-﻿  Presenter.cpp
-  Quote.cpp
-  Seller.cpp
+﻿  Store.cpp
   View.cpp
-  main.cpp
   Generando código...
   ClothesQuotingSystem.vcxproj -> C:\Users\Usuario\source\repos\ClothesQuotingSystem\x64\Debug\ClothesQuotingSystem.exe

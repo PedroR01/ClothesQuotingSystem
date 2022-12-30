@@ -13,6 +13,7 @@ private:
 	void showMainMenu();
 	void sellerOptions();
 	void quoteMenu();
+	void quoteRecord();
 public:
 	View();
 	~View() override;

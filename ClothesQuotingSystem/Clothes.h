@@ -9,5 +9,8 @@ public:
 	std::string quality[2];
 	double unitPrice;
 	int stockAmount[2]; // Deberia hacerlo matriz??
+
+	Clothes();
+	virtual ~Clothes();
 };
 #endif // !CLOTHES_H

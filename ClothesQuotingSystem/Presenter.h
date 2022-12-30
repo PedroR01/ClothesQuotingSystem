@@ -12,13 +12,14 @@ private:
 	IView* m_View = nullptr;
 
 public:
-	Seller* m_Seller = nullptr;
+	Seller* m_Seller;
 	explicit Presenter(IView* view);
 	~Presenter();
 	void seeQuoteRecord();
 	void startQuote(int& clothes);
-	const std::string seeSellerName();
-	const int* seeSellerCode();
+	std::string seeSellerStore() const;
+	std::string seeSellerName() const;
+	int seeSellerCode() const;
 };
 
 #endif // !PRESENTER_H

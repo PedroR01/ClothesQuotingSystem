@@ -20,12 +20,17 @@ void Presenter::startQuote(int& clothes)
 	m_Seller->quoteProduct(clothes);
 }
 
-const std::string Presenter::seeSellerName()
+std::string Presenter::seeSellerStore() const
 {
-	return m_Seller->getSellerName();;
+	return m_Seller->getSellerStore();
 }
 
-const int* Presenter::seeSellerCode()
+std::string Presenter::seeSellerName() const
+{
+	return m_Seller->getSellerName();
+}
+
+int Presenter::seeSellerCode() const
 {
 	return m_Seller->getSellerCode();
 }

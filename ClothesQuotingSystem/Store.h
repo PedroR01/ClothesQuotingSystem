@@ -8,10 +8,17 @@ class Clothes;
 
 class Store
 {
-public:
-	const std::string* storeName;
+private:
+	std::string storeName;
 	std::string address;
-	std::vector<Clothes> clothesList;
+	Clothes* shirt;
+	Clothes* pants;
+	std::vector<Clothes*> clothesList;
+
+public:
+	Store();
+	~Store();
+	std::string getStoreInfo() const;
 };
 
 #endif // !STORE_H
