@@ -34,3 +34,13 @@ int Presenter::seeSellerCode() const
 {
 	return m_Seller->getSellerCode();
 }
+
+void Presenter::sendClothesData(int clothesType, int alternative1, int alternative2, int quality)
+{
+	m_Seller->setClothesSpecifications(clothesType, alternative1, alternative2, quality);
+}
+
+int Presenter::returnStock()
+{
+	return m_Seller->getClothesStockAmount();
+}

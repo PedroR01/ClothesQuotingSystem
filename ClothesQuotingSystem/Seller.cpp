@@ -49,6 +49,16 @@ int Seller::getSellerCode() const
 	return sellerCode;
 }
 
+void Seller::setClothesSpecifications(int clothesType, int alternative1, int alternative2, int quality)
+{
+	sellerStore->setClothesPreferences(clothesType, alternative1, alternative2, quality);
+}
+
+int Seller::getClothesStockAmount()
+{
+	return sellerStore->getClothesStock();
+}
+
 std::string Seller::parseNum(int value)
 {
 	std::ostringstream aux;

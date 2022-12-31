@@ -26,6 +26,8 @@ public:
 	std::string getSellerStore()const;
 	std::string getSellerName() const;
 	int getSellerCode() const;
+	void setClothesSpecifications(int clothesType, int alternative1, int alternative2, int quality);
+	int getClothesStockAmount();
 	std::string parseNum(int value);
 };
 #endif // !SELLER_H

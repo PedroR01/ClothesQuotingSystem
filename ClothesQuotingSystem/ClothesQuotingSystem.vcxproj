@@ -129,9 +129,11 @@
   <ItemGroup>
     <ClCompile Include="Clothes.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pants.cpp" />
     <ClCompile Include="Presenter.cpp" />
     <ClCompile Include="Quote.cpp" />
     <ClCompile Include="Seller.cpp" />
+    <ClCompile Include="Shirt.cpp" />
     <ClCompile Include="Store.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>

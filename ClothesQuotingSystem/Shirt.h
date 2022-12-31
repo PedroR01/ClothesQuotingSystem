@@ -3,14 +3,14 @@
 #define SHIRT_H
 #include "Clothes.h"
 
-enum class ShirtVariations
-{
-	shortSleeve,
-	mandarinCollar
-};
-
 class Shirt : public Clothes
 {
+public:
+	bool shortSleeve;
+	bool mandarinCollar;
+
+	Shirt();
+	~Shirt() override;
 };
 
 #endif // !SHIRT_H

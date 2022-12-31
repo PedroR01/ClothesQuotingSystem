@@ -20,6 +20,8 @@ public:
 	std::string seeSellerStore() const;
 	std::string seeSellerName() const;
 	int seeSellerCode() const;
+	void sendClothesData(int clothesType, int alternative1, int alternative2, int quality);
+	int returnStock();
 };
 
 #endif // !PRESENTER_H

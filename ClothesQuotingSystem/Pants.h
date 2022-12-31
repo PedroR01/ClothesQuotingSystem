@@ -10,6 +10,11 @@ enum class PantsVariations
 
 class Pants : public Clothes
 {
+public:
+	bool skinny;
+
+	Pants();
+	~Pants() override;
 };
 
 #endif // !PANTS_H
