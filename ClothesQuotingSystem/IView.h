@@ -11,6 +11,6 @@ public:
 	virtual void showText(const std::string& text) = 0;
 	virtual void showTextWithSection(const std::string& text) = 0;
 	virtual void showTextWithOptions(const std::string& text) = 0;
-	virtual std::string parseNum(int value) = 0;
+	virtual std::string parseNum(double value) = 0;
 };
 #endif // !IVIEW_H

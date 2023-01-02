@@ -5,8 +5,8 @@
 #include <vector>
 
 class Clothes;
-class Shirt;
-class Pants;
+//class Shirt;
+//class Pants;
 
 class Store
 {
@@ -15,9 +15,8 @@ private:
 	std::string address;
 	std::vector<Clothes*> clothesList;
 
-	Clothes* shirt, * pants;
-	Shirt* _shirt;
-	Pants* _pants;
+	//Shirt* _shirt;
+	//Pants* _pants;
 
 public:
 	Store();
@@ -25,7 +24,11 @@ public:
 	std::string getStoreInfo() const;
 	void getClothesInfo();
 	void setClothesPreferences(int clothesType, int alternative1, int alternative2, int quality);
-	int getClothesStock();
+	int getClothesStock(int clothesType);
+	void setUnitsAndQuote(int& clothes, int units, double quote);
+	double getUnitPrice();
+	void getClothesSpecs(bool& alternative1, bool& alternative2, bool& quality);
+	void getClothesSpecs(bool& alternative1, bool& quality);
 };
 
 #endif // !STORE_H

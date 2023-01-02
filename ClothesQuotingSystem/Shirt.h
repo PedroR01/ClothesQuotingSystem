@@ -11,6 +11,8 @@ public:
 
 	Shirt();
 	~Shirt() override;
+	void setDerivedOptions(int alternative[]) override;
+	int getDerivedClothes() override;
 };
 
 #endif // !SHIRT_H

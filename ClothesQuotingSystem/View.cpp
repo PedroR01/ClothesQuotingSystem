@@ -52,7 +52,7 @@ void View::showMainMenu()
 
 void View::quoteMenu()
 {
-	//system("CLS");
+	system("CLS");
 
 	showTextWithSection("\nSTEP 1: Select clothes to quote");
 	showText("1) Shirt");
@@ -60,7 +60,8 @@ void View::quoteMenu()
 
 	int option, alternative1 = 0, alternative2 = 0, quality = 0;
 	std::cin >> option;
-	//m_Presenter->startQuote(option);
+
+	system("CLS");
 
 	// DIFERENT CLOTHES AND RETURN OPTIONS
 	if (option == 1) // Shirt
@@ -85,43 +86,69 @@ void View::quoteMenu()
 		showMainMenu();
 	}
 
+	system("CLS");
+
 	// STANDARD - PREMIUM
-	showTextWithOptions("\nSTEP 3: Select clothes quality");
+	showTextWithSection("\nSTEP 3: Select clothes quality");
+	showText("1) Standard");
+	showText("2) Premium");
 	std::cin >> quality; // Could reset variable option and use it here but it will get messy
 
 	// Send all data selected by the seller/user
 	m_Presenter->sendClothesData(option, alternative1, alternative2, quality);
 
 	// Getting clothes stock avaible data
-	showTextWithSection("SHIRTS ACTUAL STOCK " + parseNum(m_Presenter->returnStock()));
-	quoteMenu();
+	int stock = m_Presenter->returnStock(option);
 
-	// Continuo con la carga
-	// PRICE X UNIT
-	// SHOW STOCK AND INPUT AMOUNT TO QUOTE
-	// RECEIPT
+	// QUOTE/PRICE X UNIT
+	double quote = 0;
+	system("CLS");
+
+	showTextWithSection("STEP 4: Enter quote per unit");
+	std::cin >> quote;
+
+	// SHOW STOCK AND INPUT NUMBER OF UNITS TO QUOTE
+	int unitsToQuote = 0;
+	system("CLS");
+
+	showText("IMPORTANT INFORMATION\nThere is only " + parseNum(stock) + " units in stock for the clothes you selected");
+	showText("");
+	showTextWithSection("STEP 5: Enter the number of units to quote");
+	std::cin >> unitsToQuote;
+
+	// Send quote and number of units
+	m_Presenter->sendDataToQuote(option, unitsToQuote, quote);
+
+	// GET QUOTE DATA AND MAKE A RECEIPT
+	quoteRecord();
+
 	// BACK TO MAIN MENU
+	option = 0;
+	std::cin >> option;
+
+	while (option != 3)
+		std::cin >> option;
+
+	showMainMenu();
 }
 
-void View::quoteRecord()
+void View::quoteRecord() // Booleano como parametro para ver el historial?
 {
 	system("CLS");
 
-	std::cout << SECTION << std::endl;
-	std::cout << "Press 3 to return to Main Menu" << std::endl;
-	std::cout << SECTION << std::endl;
+	showText(SECTION);
+	showTextWithSection("Press 3 to return to Main Menu");
 
-	showText("Quote Id number: " + parseNum(1));
-	showText("Time and date of emition: " + parseNum(2));
-	showText("Sellers code: " + parseNum(3));
-	showText("Quoted clothes: " + parseNum(4));
-	showText("Unit price: " + parseNum(5));
-	showText("Amount of quoted units: " + parseNum(6));
-	showText("Final outcome: " + parseNum(7));
+	showText("Quote Id number: " + m_Presenter->seeQuoteInfo(1));
+	showText("Time and date of emition: " + m_Presenter->seeQuoteInfo(2));
+	showText("Seller code: " + m_Presenter->seeQuoteInfo(3));
+	showText("Quoted clothes: " + m_Presenter->seeQuoteInfo(4));
+	showText("Unit price: " + parseNum(m_Presenter->seeUnitPrice()));
+	showText("Amount of quoted units: " + m_Presenter->seeQuoteInfo(5));
+	showText("Final outcome: " + m_Presenter->seeQuoteInfo(6));
 
-	std::cout << SECTION << std::endl;
-	std::cout << "Press 3 to return to Main Menu" << std::endl;
-	std::cout << SECTION << std::endl;
+	showText(SECTION);
+	showTextWithSection("Press 3 to return to Main Menu");
 }
 
 void View::showText(const std::string& text)
@@ -143,7 +170,7 @@ void View::showTextWithOptions(const std::string& text)
 	std::cout << SECTION << std::endl;
 }
 
-std::string View::parseNum(int value)
+std::string View::parseNum(double value)
 {
 	std::ostringstream aux;
 	aux << value; // Toma los valores de value y los transforma en un array de char

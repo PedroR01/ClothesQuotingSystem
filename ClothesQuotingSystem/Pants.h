@@ -3,11 +3,6 @@
 #define PANTS_H
 #include "Clothes.h"
 
-enum class PantsVariations
-{
-	skinny
-};
-
 class Pants : public Clothes
 {
 public:
@@ -15,6 +10,8 @@ public:
 
 	Pants();
 	~Pants() override;
+	void setDerivedOptions(int alternative[]) override;
+	int getDerivedClothes() override;
 };
 
 #endif // !PANTS_H

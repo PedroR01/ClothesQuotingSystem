@@ -7,14 +7,13 @@ class Clothes
 {
 public:
 	std::string derivedName;
-	std::string quality[2];
+	int quality;
 	double unitPrice;
 	int stockAmount;
-	//int stockAmount[2]; // Deberia hacerlo matriz??
-	//int shirtStock[14];
-	//int pantsStock[6];
 
 	Clothes();
 	virtual ~Clothes();
+	virtual void setDerivedOptions(int alternative[]) = 0;
+	virtual int getDerivedClothes() = 0;
 };
 #endif // !CLOTHES_H

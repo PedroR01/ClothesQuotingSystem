@@ -2,7 +2,6 @@
 #ifndef QUOTE_H
 #define QUOTE_H
 #include <string>
-#include <ctime>
 
 class Seller;
 
@@ -11,7 +10,7 @@ class Quote
 private:
 
 	static int quoteId;
-	time_t quoteTime;
+	char quoteTime[26];
 	int sellerCode;
 	std::string quotedClothes;
 	int quotedUnits;
@@ -20,7 +19,9 @@ private:
 public:
 	Quote(int& clothes, Seller* accessCode);
 	~Quote();
-	int calculate(int& _quotedUnits);
+	void calculate(int& _quotedUnits, Seller* m_seller);
+	std::string getQuoteInformation(int choose);
+	std::string parseNum(double value);
 };
 
 #endif // !QUOTE_H

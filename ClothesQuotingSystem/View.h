@@ -20,6 +20,6 @@ public:
 	void showText(const std::string& text) override;
 	void showTextWithSection(const std::string& text) override;
 	void showTextWithOptions(const std::string& text) override;
-	std::string parseNum(int value) override;
+	std::string parseNum(double value) override;
 };
 #endif // !VIEW_H

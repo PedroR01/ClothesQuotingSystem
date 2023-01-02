@@ -15,11 +15,6 @@ void Presenter::seeQuoteRecord()
 {
 }
 
-void Presenter::startQuote(int& clothes)
-{
-	m_Seller->quoteProduct(clothes);
-}
-
 std::string Presenter::seeSellerStore() const
 {
 	return m_Seller->getSellerStore();
@@ -40,7 +35,22 @@ void Presenter::sendClothesData(int clothesType, int alternative1, int alternati
 	m_Seller->setClothesSpecifications(clothesType, alternative1, alternative2, quality);
 }
 
-int Presenter::returnStock()
+void Presenter::sendDataToQuote(int& clothes, int units, double quote)
 {
-	return m_Seller->getClothesStockAmount();
+	m_Seller->setUnitsAndQuote(clothes, units, quote);
+}
+
+int Presenter::returnStock(int clothesType)
+{
+	return m_Seller->getClothesStockAmount(clothesType);
+}
+
+std::string Presenter::seeQuoteInfo(int choose)
+{
+	return m_Seller->getQuoteInfo(choose);
+}
+
+double Presenter::seeUnitPrice()
+{
+	return m_Seller->getUnitPrice();
 }

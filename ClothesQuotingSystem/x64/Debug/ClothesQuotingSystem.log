@@ -1,3 +1,12 @@
-﻿  View.cpp
-C:\Users\Usuario\source\repos\ClothesQuotingSystem\ClothesQuotingSystem\View.cpp(104): warning C4717: 'View::quoteMenu': recursiva para todas las rutas de acceso de control; la función provocará el desbordamiento de la pila en tiempo de ejecución
+﻿  Clothes.cpp
+  Pants.cpp
+  Presenter.cpp
+  Quote.cpp
+  Seller.cpp
+  Shirt.cpp
+  Store.cpp
+  View.cpp
+  main.cpp
+  Generando código...
+C:\Users\Usuario\source\repos\ClothesQuotingSystem\ClothesQuotingSystem\Quote.cpp(78): warning C4715: 'Quote::getQuoteInformation': no todas las rutas de acceso de control devuelven un valor
   ClothesQuotingSystem.vcxproj -> C:\Users\Usuario\source\repos\ClothesQuotingSystem\x64\Debug\ClothesQuotingSystem.exe
