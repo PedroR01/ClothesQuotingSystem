@@ -68,6 +68,8 @@ void Quote::calculate(int& _quotedUnits, Seller* _seller)
 			str += " - Regular pants";
 	}
 
+	quoteOutcome = _initialPrice;
+
 	// CLOTHES QUALITY PRICE CHANGERS
 	if (premium) // Premium
 	{

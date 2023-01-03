@@ -16,6 +16,14 @@ Seller::Seller()
 	std::cout << "Seller code: ";
 	std::cin >> sellerCode;
 	std::cin.get();
+	while (std::cin.fail())
+	{
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
+		std::cout << "Seller code (only int values): ";
+		std::cin >> sellerCode;
+		std::cin.get();
+	}
 
 	sellerStore = new Store();
 }

@@ -1,11 +1,5 @@
-﻿  Clothes.cpp
-  Pants.cpp
-  Presenter.cpp
-  Quote.cpp
-  Seller.cpp
-  Shirt.cpp
-  Store.cpp
+﻿  Quote.cpp
   View.cpp
   Generando código...
-C:\Users\Usuario\source\repos\ClothesQuotingSystem\ClothesQuotingSystem\Quote.cpp(101): warning C4715: 'Quote::getQuoteInformation': no todas las rutas de acceso de control devuelven un valor
+C:\Users\Usuario\source\repos\ClothesQuotingSystem\ClothesQuotingSystem\Quote.cpp(103): warning C4715: 'Quote::getQuoteInformation': no todas las rutas de acceso de control devuelven un valor
   ClothesQuotingSystem.vcxproj -> C:\Users\Usuario\source\repos\ClothesQuotingSystem\x64\Debug\ClothesQuotingSystem.exe

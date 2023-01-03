@@ -22,3 +22,5 @@ Note: If you didnt quote anything earlier, you wont see anything selecting that 
 Note: Pay attention to the stock limit for each kind of clothes.<br>
 
 . Once you finished with your quote, a ticket/record of it will shown to you and you will be able to return to the main menu.<br>
+
+<a href="https://www.figma.com/file/s1Jhrh7pQf3ovJkI9hBg7Y/Desafio-Final-C%2B%2B---Quark-Academy?node-id=0%3A1&t=0RVyfBtIbUb0ppK2-1">Link to see app UML diagram!</a> 

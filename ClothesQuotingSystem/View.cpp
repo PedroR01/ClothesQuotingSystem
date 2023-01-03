@@ -47,8 +47,10 @@ void View::showMainMenu()
 
 	int choice = 0;
 	do {
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
 		std::cin >> choice;
-	} while (choice <= 0 || choice > 3);
+	} while (choice <= 0 || choice > 3 || std::cin.fail());
 
 	if (choice == 1)
 	{
@@ -162,10 +164,12 @@ void View::selectOption(int& input, int min, int max)
 {
 	do
 	{
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
 		std::cin >> input;
 		if (input  < min && step5InputError || input > max && step5InputError) // Showed in Step5 of quoteMenu
 			showTextWithSection("UNITS INPUT ERROR: You cant quote 0 units or more units that what are avaible in stock. Please try again.");
-	} while (input < min || input > max && max != 0);
+	} while (input < min || input > max && max != 0 || std::cin.fail());
 
 	if (input == 3)
 		showMainMenu();
@@ -175,8 +179,10 @@ void View::selectOption(double& input, int min, int max)
 {
 	do
 	{
+		std::cin.clear();
+		std::cin.ignore(INT_MAX, '\n');
 		std::cin >> input;
-	} while (input < min || input > max);
+	} while (input < min || input > max || std::cin.fail());
 
 	if (input == 3)
 		showMainMenu();
@@ -197,7 +203,7 @@ void View::showTextWithOptions(const std::string& text)
 	std::cout << text << std::endl;
 	std::cout << SECTION << std::endl;
 	std::cout << "1) Yes" << std::endl;
-	std::cout << "1) No" << std::endl;
+	std::cout << "2) No" << std::endl;
 	std::cout << SECTION << std::endl;
 }
 
