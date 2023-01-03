@@ -5,7 +5,7 @@
 . At the beginning of the proogram you will be asked to enter the following basic data:<br>
 <span>  - Name.<br>
 <span>  - Lastname.<br>
-<span>  - Seller code. (your official seller id)<br>
+<span>  - Seller code. (your official seller id [only int values])<br>
 <span>  - Store name.<br>
 <span>  - Store Address.<br>
 <br>
