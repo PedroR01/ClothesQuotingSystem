@@ -31,10 +31,9 @@ public:
 	int returnStock(int clothesType);
 	std::string seeQuoteInfo(int choose);
 	double seeUnitPrice();
+	void seeQuoteRecord();
 
 #pragma endregion
-
-	void seeQuoteRecord();
 };
 
 #endif // !PRESENTER_H

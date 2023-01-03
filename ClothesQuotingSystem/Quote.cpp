@@ -38,14 +38,14 @@ void Quote::calculate(int& _quotedUnits, Seller* _seller)
 		_seller->getClothesSpecifications(_initialPrice, _shortSleeve, _mandarinCollar, premium);
 
 		// SHIRT PRICE CHANGERS
-		if (_shortSleeve) // Manga corta vale un -10%
+		if (_shortSleeve) // Short sleeve -10% to quote
 		{
 			_initialPrice -= (_initialPrice * 10) / 100;
 			str += " - Short sleeve";
 		}
 		if (_mandarinCollar)
 		{
-			_initialPrice += (_initialPrice * 3) / 100; // Cuello mao es un 3% mas cara
+			_initialPrice += (_initialPrice * 3) / 100; // Mandarin collar +3% to the quote
 			str += " - Mandarin collar";
 		}
 		if (!_shortSleeve)
@@ -61,7 +61,7 @@ void Quote::calculate(int& _quotedUnits, Seller* _seller)
 		// PANTS PRICE CHANGERS
 		if (_skinny)
 		{
-			_initialPrice -= (_initialPrice * 12) / 100; // Precio es -12% si es chupin
+			_initialPrice -= (_initialPrice * 12) / 100; // Quote -12% if they are skinny pants
 			str += " - Skinny pants";
 		}
 		else if (!_skinny)
@@ -71,7 +71,7 @@ void Quote::calculate(int& _quotedUnits, Seller* _seller)
 	// CLOTHES QUALITY PRICE CHANGERS
 	if (premium) // Premium
 	{
-		quoteOutcome += (_initialPrice * 30) / 100; // Precio final es +30% si es calidad premium
+		quoteOutcome += (_initialPrice * 30) / 100; // Quote +30% if his quality is premium
 		str += " - Premium";
 	}
 	else // Standard --> Doesn´t affect the final quote value
@@ -84,10 +84,10 @@ void Quote::calculate(int& _quotedUnits, Seller* _seller)
 	quoteOutcome = quoteOutcome * quotedUnits; // FINAL QUOTE * UNITS QUOTED
 }
 
-std::string Quote::getQuoteInformation(int choose)
+std::string Quote::getQuoteInformation(int choose) // returns single information
 {
 	if (choose == 1)
-		return parseNum(quoteId); // Hace falta que retorne esto al ser static?
+		return parseNum(quoteId);
 	else if (choose == 2)
 		return quoteTime;
 	else if (choose == 3)
@@ -100,7 +100,7 @@ std::string Quote::getQuoteInformation(int choose)
 		return parseNum(quoteOutcome);
 }
 
-std::vector<std::string> Quote::getAllQuoteInfo()
+std::vector<std::string> Quote::getAllQuoteInfo() // returns all info in a single vector
 {
 	std::vector<std::string> allQuoteInfo;
 
@@ -110,15 +110,6 @@ std::vector<std::string> Quote::getAllQuoteInfo()
 	allQuoteInfo.push_back(quotedClothes);
 	allQuoteInfo.push_back(parseNum(quotedUnits));
 	allQuoteInfo.push_back(parseNum(quoteOutcome));
-
-	/*
-	allQuoteInfo[0] = parseNum(quoteId);
-	allQuoteInfo[1] = quoteTime;
-	allQuoteInfo[2] = parseNum(sellerCode);
-	allQuoteInfo[3] = quotedClothes;
-	allQuoteInfo[4] = parseNum(quotedUnits);
-	allQuoteInfo[5] = parseNum(quoteOutcome);
-	*/
 
 	return allQuoteInfo;
 }

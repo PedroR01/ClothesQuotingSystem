@@ -11,12 +11,11 @@ class Seller
 {
 private:
 
-	// Podrian ser valores constantes, pero entonces se me dificulta para introducir sus valores por input y obtener estos mismos a traves de getters
 	std::string name;
 	std::string lastname;
 	int sellerCode;
 
-	std::vector<Quote> quotesRecord;
+	std::vector<std::string> quoteInfoVec;
 	Store* sellerStore;
 
 public:

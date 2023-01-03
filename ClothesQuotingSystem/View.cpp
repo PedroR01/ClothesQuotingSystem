@@ -62,6 +62,8 @@ void View::showMainMenu()
 
 void View::quoteMenu()
 {
+	step5InputError = false;
+
 	header("Quote");
 
 	showTextWithSection("\nSTEP 1: Select clothes to quote");
@@ -76,8 +78,6 @@ void View::quoteMenu()
 	// DIFERENT CLOTHES AND RETURN OPTIONS
 	if (option == 1) // Shirt
 	{
-		// Podrian reemplazarse las diferentes variables de alternativas por una sola que sea un array declarado para cada caso y que tenga
-		// una cantidad determinada para cada tipo de ropa dependiendo de sus cantidades de variaciones
 		showTextWithOptions("\nSTEP 2.a: Is the shirt short sleeved?");
 		selectOption(alternative1, 1, 3);
 
@@ -101,7 +101,7 @@ void View::quoteMenu()
 	showTextWithSection("\nSTEP 3: Select clothes quality");
 	showText("1) Standard");
 	showText("2) Premium");
-	selectOption(quality, 1, 3); // Could reset variable option and use it here but it will get messy
+	selectOption(quality, 1, 3);
 
 	// Send all data selected by the seller/user
 	m_Presenter->sendClothesData(option, alternative1, alternative2, quality);
@@ -117,7 +117,6 @@ void View::quoteMenu()
 	selectOption(quote, 1, INT_MAX);
 
 	// SHOW STOCK AND INPUT NUMBER OF UNITS TO QUOTE
-	step5InputError = false;
 	int unitsToQuote = 0;
 	header("Quote");
 
@@ -134,12 +133,13 @@ void View::quoteMenu()
 	quoteRecord();
 	m_Presenter->seeQuoteRecord();
 
+	step5InputError = false;
 	// BACK TO MAIN MENU
 	option = 0;
 	selectOption(option, 3, 3);
 }
 
-void View::quoteRecord() // Booleano como parametro para ver el historial?
+void View::quoteRecord() // Boolean to see record?
 {
 	header("Quote Record");
 
@@ -204,6 +204,6 @@ void View::showTextWithOptions(const std::string& text)
 std::string View::parseNum(double value)
 {
 	std::ostringstream aux;
-	aux << value; // Toma los valores de value y los transforma en un array de char
-	return aux.str(); // Transforma el array en string y lo retorna
+	aux << value; // Take the values of variable value and it change them into a char array
+	return aux.str(); // Transforms the char array into a string and returns it
 }

@@ -17,7 +17,7 @@ Pants::~Pants()
 {
 }
 
-void Pants::setDerivedOptions(int alternative[])
+void Pants::setDerivedOptions(int alternative[]) // Sets the type of pants for further quote
 {
 	if (alternative[0] == 1)
 		skinny = true;
@@ -25,7 +25,7 @@ void Pants::setDerivedOptions(int alternative[])
 		skinny = false;
 }
 
-int Pants::getDerivedClothes()
+int Pants::getDerivedClothes() // gets wich type of pants are being quoted by returning an int value wich is interpreted later
 {
 	if (!skinny) // Normal
 		return 1;
@@ -33,7 +33,7 @@ int Pants::getDerivedClothes()
 		return 2;
 }
 
-void Pants::setParticularStock(int amountQuoted)
+void Pants::setParticularStock(int amountQuoted) // updates the stock for those variations of Pants that are being quoted (not implemented)
 {
 	if (skinny)
 	{
@@ -55,7 +55,7 @@ void Pants::setParticularStock(int amountQuoted)
 	}
 }
 
-int Pants::getParticularStock()
+int Pants::getParticularStock() // get specific stock for each variation of Pants avaible (not implemented)
 {
 	if (skinny && quality == 1)
 		return particularStock[0][1]; // Skinny & Standard
@@ -63,6 +63,6 @@ int Pants::getParticularStock()
 		return particularStock[0][2]; // Skinny & Premium
 	else if (!skinny && quality == 1)
 		return particularStock[1][1]; // Regular & Standard
-	else if (!skinny && quality == 2)
+	else
 		return particularStock[1][2]; // Regular & Premium
 }

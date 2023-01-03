@@ -11,7 +11,7 @@ Shirt::~Shirt()
 {
 }
 
-void Shirt::setDerivedOptions(int alternative[])
+void Shirt::setDerivedOptions(int alternative[]) // Sets the type of shirt for further quote
 {
 	if (alternative[0] == 1)
 		shortSleeve = true;
@@ -24,9 +24,8 @@ void Shirt::setDerivedOptions(int alternative[])
 		mandarinCollar = false;
 }
 
-int Shirt::getDerivedClothes()
+int Shirt::getDerivedClothes() // gets wich type of shirt is being quoted by returning an int value wich is interpreted later
 {
-	// Sumar o restar los valores segun sus variaciones para determinar un resultado final y luego desde Store se asocia ese numero a un las cualidades
 	int _short = 1, _long = 2, mandarin = 3, regular = 5;
 	int finalShirt = 0;
 
@@ -45,4 +44,13 @@ int Shirt::getDerivedClothes()
 	// long & regular = 7
 
 	return finalShirt;
+}
+
+void Shirt::setParticularStock(int amountQuoted) // updates the stock for those variations of shirt that are being quoted
+{
+}
+
+int Shirt::getParticularStock() // get specific stock for each variation of Shirts avaible
+{
+	return -1;
 }

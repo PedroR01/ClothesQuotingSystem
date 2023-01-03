@@ -5,18 +5,12 @@
 #include <vector>
 
 class Clothes;
-//class Shirt;
-//class Pants;
 
 class Store
 {
 private:
 	std::string storeName;
 	std::string address;
-	std::vector<Clothes*> clothesList;
-
-	//Shirt* _shirt;
-	//Pants* _pants;
 
 public:
 	Store();
@@ -25,7 +19,7 @@ public:
 #pragma region Setters
 
 	void setClothesPreferences(int clothesType, int alternative1, int alternative2, int quality);
-	void setUnitsAndQuote(int& clothes, int units, double quote);
+	void setUnitsAndQuote(int units, double quote);
 
 #pragma endregion
 

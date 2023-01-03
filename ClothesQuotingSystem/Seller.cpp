@@ -4,7 +4,7 @@
 #include <iostream>
 #include <sstream>
 
-std::vector<std::shared_ptr<Quote>> quotesRecord_2;
+std::vector<std::shared_ptr<Quote>> quotesRecord;
 int Quote::quoteId = 000;
 
 Seller::Seller()
@@ -15,6 +15,7 @@ Seller::Seller()
 	std::getline(std::cin, lastname);
 	std::cout << "Seller code: ";
 	std::cin >> sellerCode;
+	std::cin.get();
 
 	sellerStore = new Store();
 }
@@ -29,15 +30,11 @@ Seller::~Seller()
 
 void Seller::quoteProduct(int& clothes, int units)
 {
-	//std::unique_ptr<Quote> quote(new Quote(clothes, this));
+	// Creates a new quote and executes the constructor through a smart shared pointer
 	auto quote = std::make_shared<Quote>(clothes, this);
 
-	//Quote* quote = new Quote(clothes, this);
-
 	quote->calculate(units, this);
-	quotesRecord_2.push_back(quote);
-
-	//return result;
+	quotesRecord.push_back(quote);
 }
 
 #pragma endregion
@@ -51,7 +48,7 @@ void Seller::setClothesSpecifications(int clothesType, int alternative1, int alt
 
 void Seller::setUnitsAndQuote(int& clothes, int units, double quote)
 {
-	sellerStore->setUnitsAndQuote(clothes, units, quote); // Units are required to rest them from the stock avaible
+	sellerStore->setUnitsAndQuote(units, quote); // Units are required to rest them from the stock avaible
 	quoteProduct(clothes, units); // Units are required to make the correct quote // Returns the resu
 }
 
@@ -61,7 +58,7 @@ void Seller::setUnitsAndQuote(int& clothes, int units, double quote)
 
 std::string Seller::getSellerStore()const
 {
-	return sellerStore->getStoreInfo();
+	return sellerStore->getStoreInfo(); // returns the store name and address
 }
 
 std::string Seller::getSellerName()const
@@ -74,25 +71,26 @@ int Seller::getSellerCode() const
 	return sellerCode;
 }
 
-void Seller::getClothesSpecifications(double& initialPrice, bool& alternative1, bool& alternative2, bool& quality)
+// Gets values stored in the store obj and the clothes obj for further use in the Quote obj. They are needed to make counts
+void Seller::getClothesSpecifications(double& initialPrice, bool& alternative1, bool& alternative2, bool& quality) // This is for the shirt, because it has 2 alterations in his type
 {
 	initialPrice = sellerStore->getUnitPrice();
 	sellerStore->getClothesSpecs(alternative1, alternative2, quality);
 }
-void Seller::getClothesSpecifications(double& initialPrice, bool& alternative1, bool& quality) // OVERLOAD/SOBRECARGA
+void Seller::getClothesSpecifications(double& initialPrice, bool& alternative1, bool& quality) // OVERLOAD/SOBRECARGA --> this overload is for Pants.
 {
 	initialPrice = sellerStore->getUnitPrice();
 	sellerStore->getClothesSpecs(alternative1, quality);
 }
 
-int Seller::getClothesStockAmount(int clothesType)
+int Seller::getClothesStockAmount(int clothesType) // returns the stock depending on the type of clothes
 {
 	return sellerStore->getClothesStock(clothesType);
 }
 
-std::string Seller::getQuoteInfo(int choose)
+std::string Seller::getQuoteInfo(int choose) // Returns specific info from the quote to show a final receipt in View.cpp
 {
-	return quotesRecord_2.back()->getQuoteInformation(choose);
+	return quotesRecord.back()->getQuoteInformation(choose);
 }
 
 double Seller::getUnitPrice()
@@ -100,27 +98,27 @@ double Seller::getUnitPrice()
 	return sellerStore->getUnitPrice();
 }
 
-#pragma endregion
-
-void Seller::getQuoteRecord()
+void Seller::getQuoteRecord() // I try to get every info from the quotation, save it and iterate it but it didnt work, maybe its better if I try to make a dynamic pile list
 {
-	std::vector<std::string> quoteInfoVec = quotesRecord_2.back()->getAllQuoteInfo();
-	std::string info[6];
+	quoteInfoVec = quotesRecord.back()->getAllQuoteInfo();
+	std::string info[50];
 	int counter = 0;
 
-	for (auto itr = quotesRecord_2.rbegin(); itr != quotesRecord_2.rend(); itr++)
+	for (auto itr = quotesRecord.cbegin(); itr != quotesRecord.cend(); itr++)
 	{
-		std::cout << "PROBANDO IMPRESION DE DATOS DE COTIZACION" << std::endl;
 		// this throws me an error // Trying to get al the info for each clothes quoted
-		/*for (auto itr = quoteInfoVec.cbegin(); itr != quoteInfoVec.cend(); itr++)
+		/*
+		for (auto itr = quoteInfoVec.cbegin(); itr != quoteInfoVec.cend(); itr++)
 		{
-			info[counter] = quoteInfoVec.at(counter);
+			info[counter] = quoteInfoVec.at(counter); // This is the cause --> info tries to access to an inexisting vector index.
 			std::cout << info[counter] << std::endl;
 			counter++;
 		}
 		*/
 	}
 }
+
+#pragma endregion
 
 std::string Seller::parseNum(int value)
 {

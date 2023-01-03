@@ -14,6 +14,7 @@ public:
 	Clothes();
 	virtual ~Clothes();
 
+	// Pure virtual methods
 	virtual void setDerivedOptions(int alternative[]) = 0;
 	virtual int getDerivedClothes() = 0;
 	virtual void setParticularStock(int amountQuoted) = 0;
