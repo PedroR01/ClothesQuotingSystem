@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #define SECTION "---------------------------------------"
+#define INT_MAX 2147483647
 
 View::View()
 {
@@ -17,27 +18,37 @@ View::~View()
 {
 }
 
-void View::header()
+void View::header(std::string actualSection)
 {
 	system("CLS");
 
-	showTextWithSection("\nCLOTHES QUOTING SYSTEM  -  MAIN MENU");
-	showTextWithSection(m_Presenter->seeSellerStore());
-	showTextWithSection(m_Presenter->seeSellerName() + " | " + parseNum(m_Presenter->seeSellerCode()));
+	showText(SECTION);
+	showTextWithSection("\nCLOTHES QUOTING SYSTEM  - " + actualSection);
+	if (actualSection == "Main Menu")
+	{
+		showTextWithSection(m_Presenter->seeSellerStore());
+		showTextWithSection(m_Presenter->seeSellerName() + " | " + parseNum(m_Presenter->seeSellerCode()));
+	}
+	else
+	{
+		showText(SECTION);
+		showTextWithSection("Press 3 to return to Main Menu");
+	}
 }
 
 void View::showMainMenu()
 {
-	system("CLS"); // Activar limpieza solo cuando haya establecido un encabezado con
-	header();
+	header("Main Menu");
 
 	showTextWithSection("\nPLEASE SELECT AN OPTION TO CONTINUE:");
 	showText("1) View quote record");
 	showText("2) Make a quote");
 	showTextWithSection("3) Exit");
 
-	int choice;
-	std::cin >> choice;
+	int choice = 0;
+	do {
+		std::cin >> choice;
+	} while (choice <= 0 || choice > 3);
 
 	if (choice == 1)
 	{
@@ -45,23 +56,22 @@ void View::showMainMenu()
 	}
 	else if (choice == 2)
 		quoteMenu();
-
-	else
+	else if (choice == 3)
 		exit(0);
 }
 
 void View::quoteMenu()
 {
-	system("CLS");
+	header("Quote");
 
 	showTextWithSection("\nSTEP 1: Select clothes to quote");
 	showText("1) Shirt");
 	showTextWithSection("2) Pants");
 
-	int option, alternative1 = 0, alternative2 = 0, quality = 0;
-	std::cin >> option;
+	int option = 0, alternative1 = 0, alternative2 = 0, quality = 0;
+	selectOption(option, 1, 3);
 
-	system("CLS");
+	header("Quote");
 
 	// DIFERENT CLOTHES AND RETURN OPTIONS
 	if (option == 1) // Shirt
@@ -69,30 +79,29 @@ void View::quoteMenu()
 		// Podrian reemplazarse las diferentes variables de alternativas por una sola que sea un array declarado para cada caso y que tenga
 		// una cantidad determinada para cada tipo de ropa dependiendo de sus cantidades de variaciones
 		showTextWithOptions("\nSTEP 2.a: Is the shirt short sleeved?");
-		std::cin >> alternative1;
+		selectOption(alternative1, 1, 3);
+
 		showTextWithOptions("\nSTEP 2.b: The shirt have mandarin collar?");
-		std::cin >> alternative2;
+		selectOption(alternative2, 1, 3);
+
 		std::cout << "\n" << std::endl;
 	}
 	else if (option == 2) // Pants
 	{
 		showTextWithOptions("\nSTEP 2.a: Are the pants skinny?");
-		std::cin >> alternative1;
+		selectOption(alternative1, 1, 3);
 		alternative2 = 0;
+
 		std::cout << "\n" << std::endl;
 	}
-	else // Return - Go back
-	{
-		showMainMenu();
-	}
 
-	system("CLS");
+	header("Quote");
 
 	// STANDARD - PREMIUM
 	showTextWithSection("\nSTEP 3: Select clothes quality");
 	showText("1) Standard");
 	showText("2) Premium");
-	std::cin >> quality; // Could reset variable option and use it here but it will get messy
+	selectOption(quality, 1, 3); // Could reset variable option and use it here but it will get messy
 
 	// Send all data selected by the seller/user
 	m_Presenter->sendClothesData(option, alternative1, alternative2, quality);
@@ -102,39 +111,37 @@ void View::quoteMenu()
 
 	// QUOTE/PRICE X UNIT
 	double quote = 0;
-	system("CLS");
+	header("Quote");
 
 	showTextWithSection("STEP 4: Enter quote per unit");
-	std::cin >> quote;
+	selectOption(quote, 1, INT_MAX);
 
 	// SHOW STOCK AND INPUT NUMBER OF UNITS TO QUOTE
+	step5InputError = false;
 	int unitsToQuote = 0;
-	system("CLS");
+	header("Quote");
 
 	showText("IMPORTANT INFORMATION\nThere is only " + parseNum(stock) + " units in stock for the clothes you selected");
 	showText("");
 	showTextWithSection("STEP 5: Enter the number of units to quote");
-	std::cin >> unitsToQuote;
+	step5InputError = true; // Allows to show a specific stock message in this step if an invalid value is entered
+	selectOption(unitsToQuote, 1, m_Presenter->returnStock(option));
 
 	// Send quote and number of units
 	m_Presenter->sendDataToQuote(option, unitsToQuote, quote);
 
 	// GET QUOTE DATA AND MAKE A RECEIPT
 	quoteRecord();
+	m_Presenter->seeQuoteRecord();
 
 	// BACK TO MAIN MENU
 	option = 0;
-	std::cin >> option;
-
-	while (option != 3)
-		std::cin >> option;
-
-	showMainMenu();
+	selectOption(option, 3, 3);
 }
 
 void View::quoteRecord() // Booleano como parametro para ver el historial?
 {
-	system("CLS");
+	header("Quote Record");
 
 	showText(SECTION);
 	showTextWithSection("Press 3 to return to Main Menu");
@@ -149,6 +156,30 @@ void View::quoteRecord() // Booleano como parametro para ver el historial?
 
 	showText(SECTION);
 	showTextWithSection("Press 3 to return to Main Menu");
+}
+
+void View::selectOption(int& input, int min, int max)
+{
+	do
+	{
+		std::cin >> input;
+		if (input  < min && step5InputError || input > max && step5InputError) // Showed in Step5 of quoteMenu
+			showTextWithSection("UNITS INPUT ERROR: You cant quote 0 units or more units that what are avaible in stock. Please try again.");
+	} while (input < min || input > max && max != 0);
+
+	if (input == 3)
+		showMainMenu();
+}
+
+void View::selectOption(double& input, int min, int max)
+{
+	do
+	{
+		std::cin >> input;
+	} while (input < min || input > max);
+
+	if (input == 3)
+		showMainMenu();
 }
 
 void View::showText(const std::string& text)

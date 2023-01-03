@@ -65,30 +65,51 @@ void Store::getClothesInfo()
 void Store::setClothesPreferences(int clothesType, int alternative1, int alternative2, int quality) // Para la variable alternativa1 y 2 podria ser simplemente un array de alternativas? // Alternativa: puede ser hacer una lista generica
 {
 	int _alternative[2];
+
 	if (clothesType == 1)
 	{
+		if (clothesList_2.front().get()->derivedName != "Shirt")
+		{
+			int counter = 0;
+			for (auto itr = clothesList_2.cbegin(); itr != clothesList_2.cend(); itr++) // Searchs for the clothes specified before
+			{
+				if (clothesList_2.at(counter).get()->derivedName == "Shirt")
+				{
+					clothesList_2.at(counter).swap(clothesList_2.front());
+				}
+				counter++;
+			}
+		}
+		// SHIRT SPECIFICATIONS FOR FURTHER QUOTE
 		_alternative[0] = alternative1;
 		_alternative[1] = alternative2;
-		// SHIRT SPECIFICATIONS FOR FURTHER QUOTE
-		clothesList_2.front().get()->setDerivedOptions(_alternative);
-
-		if (quality == 1)
-			clothesList_2.front().get()->quality = 1; // Standard
-		else
-			clothesList_2.front().get()->quality = 2; // Premium
 	}
 
 	else
 	{
+		if (clothesList_2.front().get()->derivedName != "Pants")
+		{
+			int counter = 0;
+			for (auto itr = clothesList_2.cbegin(); itr != clothesList_2.cend(); itr++) // Searchs for the clothes specified before
+			{
+				if (clothesList_2.at(counter).get()->derivedName == "Pants")
+				{
+					clothesList_2.at(counter).swap(clothesList_2.front());
+				}
+				counter++;
+			}
+		}
+		// PANTS SPECIFICATIONS FOR FURTHER QUOTE
 		_alternative[0] = alternative1;
-		_alternative[1] = NULL;
-		clothesList_2.back().get()->setDerivedOptions(_alternative);
-
-		if (quality == 1)
-			clothesList_2.back().get()->quality = 1; // Standard
-		else
-			clothesList_2.back().get()->quality = 2; // Premium
+		_alternative[1] = alternative2;
 	}
+
+	clothesList_2.front().get()->setDerivedOptions(_alternative);
+
+	if (quality == 1)
+		clothesList_2.front().get()->quality = 1; // Standard
+	else
+		clothesList_2.front().get()->quality = 2; // Premium
 
 	/*
 	if (clothesType == 1)
@@ -167,14 +188,15 @@ void Store::setClothesPreferences(int clothesType, int alternative1, int alterna
 
 int Store::getClothesStock(int clothesType)
 {
-	if (clothesType == 1) // Shirt stock
-		return clothesList_2.front().get()->stockAmount;
-	else // Pants stock
-		return clothesList_2.back().get()->stockAmount;
+	return clothesList_2.front().get()->stockAmount;
 }
 
-void Store::setUnitsAndQuote(int& clothes, int units, double quote) // Añadir clothesType?
+void Store::setUnitsAndQuote(int& clothes, int units, double quote) // clothes deberia ser borrado
 {
+	clothesList_2.front().get()->stockAmount -= units;
+	clothesList_2.front().get()->unitPrice = quote;
+
+	/*
 	if (clothes == 1) //Shirt
 	{
 		clothesList_2.front().get()->stockAmount -= units;
@@ -185,7 +207,7 @@ void Store::setUnitsAndQuote(int& clothes, int units, double quote) // Añadir cl
 		clothesList_2.back().get()->stockAmount -= units;
 		clothesList_2.back().get()->unitPrice = quote;
 	}
-
+	*/
 	/*
 	Shirt* _shirt2 = dynamic_cast<Shirt*>(clothesList.front());
 	_shirt2->stockAmount -= units;
@@ -200,12 +222,8 @@ void Store::setUnitsAndQuote(int& clothes, int units, double quote) // Añadir cl
 
 double Store::getUnitPrice()
 {
-	// Puede ser conveniente guardar el precio wn una variable global para luego utilizarla sin el casting?
-
-	if (true) // Shirt
-		return clothesList_2.front().get()->unitPrice;
-	else // Pants
-		return clothesList_2.back().get()->unitPrice;
+	// The last clothes to get quoted is always at the front of the Vector --> see setClothesPreferences()
+	return clothesList_2.front().get()->unitPrice;
 }
 
 void Store::getClothesSpecs(bool& alternative1, bool& alternative2, bool& quality)
@@ -242,14 +260,14 @@ void Store::getClothesSpecs(bool& alternative1, bool& alternative2, bool& qualit
 void Store::getClothesSpecs(bool& alternative1, bool& quality) // OVERLOAD/SOBRECARGA
 {
 	// Pants for now
-	int whatPants = clothesList_2.back().get()->getDerivedClothes();
+	int whatPants = clothesList_2.front().get()->getDerivedClothes();
 
 	if (whatPants == 1) // normal
 		alternative1 = false;
 	else
 		alternative1 = true;
 
-	if (clothesList_2.back().get()->quality == 1)
+	if (clothesList_2.front().get()->quality == 1)
 		quality = false; // Standard
 	else
 		quality = true; // Premium

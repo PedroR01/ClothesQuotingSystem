@@ -13,7 +13,10 @@ public:
 
 	Clothes();
 	virtual ~Clothes();
+
 	virtual void setDerivedOptions(int alternative[]) = 0;
 	virtual int getDerivedClothes() = 0;
+	virtual void setParticularStock(int amountQuoted) = 0;
+	virtual int getParticularStock() = 0;
 };
 #endif // !CLOTHES_H

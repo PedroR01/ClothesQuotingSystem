@@ -2,6 +2,7 @@
 #ifndef QUOTE_H
 #define QUOTE_H
 #include <string>
+#include <vector>
 
 class Seller;
 
@@ -19,8 +20,10 @@ private:
 public:
 	Quote(int& clothes, Seller* accessCode);
 	~Quote();
+
 	void calculate(int& _quotedUnits, Seller* m_seller);
 	std::string getQuoteInformation(int choose);
+	std::vector<std::string> getAllQuoteInfo();
 	std::string parseNum(double value);
 };
 

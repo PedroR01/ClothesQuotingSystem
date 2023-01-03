@@ -11,9 +11,21 @@ Presenter::~Presenter()
 	delete m_Seller;
 }
 
-void Presenter::seeQuoteRecord()
+#pragma region SEND
+
+void Presenter::sendClothesData(int clothesType, int alternative1, int alternative2, int quality)
 {
+	m_Seller->setClothesSpecifications(clothesType, alternative1, alternative2, quality);
 }
+
+void Presenter::sendDataToQuote(int& clothes, int units, double quote)
+{
+	m_Seller->setUnitsAndQuote(clothes, units, quote);
+}
+
+#pragma endregion
+
+#pragma region SEE/RETURN
 
 std::string Presenter::seeSellerStore() const
 {
@@ -30,16 +42,6 @@ int Presenter::seeSellerCode() const
 	return m_Seller->getSellerCode();
 }
 
-void Presenter::sendClothesData(int clothesType, int alternative1, int alternative2, int quality)
-{
-	m_Seller->setClothesSpecifications(clothesType, alternative1, alternative2, quality);
-}
-
-void Presenter::sendDataToQuote(int& clothes, int units, double quote)
-{
-	m_Seller->setUnitsAndQuote(clothes, units, quote);
-}
-
 int Presenter::returnStock(int clothesType)
 {
 	return m_Seller->getClothesStockAmount(clothesType);
@@ -54,3 +56,10 @@ double Presenter::seeUnitPrice()
 {
 	return m_Seller->getUnitPrice();
 }
+
+void Presenter::seeQuoteRecord()
+{
+	m_Seller->getQuoteRecord();
+}
+
+#pragma endregion

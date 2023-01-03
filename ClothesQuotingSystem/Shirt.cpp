@@ -4,7 +4,7 @@
 Shirt::Shirt()
 {
 	derivedName = "Shirt";
-	stockAmount = 2000;
+	stockAmount = 1000;
 }
 
 Shirt::~Shirt()

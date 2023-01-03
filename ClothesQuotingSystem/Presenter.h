@@ -15,15 +15,26 @@ public:
 	Seller* m_Seller;
 	explicit Presenter(IView* view);
 	~Presenter();
-	void seeQuoteRecord();
+
+#pragma region SEND
+
+	void sendClothesData(int clothesType, int alternative1, int alternative2, int quality);
+	void sendDataToQuote(int& clothes, int units, double quote);
+
+#pragma endregion
+
+#pragma region SEE/RETURN
+
 	std::string seeSellerStore() const;
 	std::string seeSellerName() const;
 	int seeSellerCode() const;
-	void sendClothesData(int clothesType, int alternative1, int alternative2, int quality);
-	void sendDataToQuote(int& clothes, int units, double quote);
 	int returnStock(int clothesType);
 	std::string seeQuoteInfo(int choose);
 	double seeUnitPrice();
+
+#pragma endregion
+
+	void seeQuoteRecord();
 };
 
 #endif // !PRESENTER_H
