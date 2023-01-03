@@ -123,6 +123,6 @@ void Seller::getQuoteRecord() // I try to get every info from the quotation, sav
 std::string Seller::parseNum(int value)
 {
 	std::ostringstream aux;
-	aux << value; // Toma los valores de value y los transforma en un array de char
-	return aux.str(); // Transforma el array en string y lo retorna
+	aux << value;
+	return aux.str();
 }
